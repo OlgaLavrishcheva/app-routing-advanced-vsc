@@ -14,11 +14,9 @@ export class PhraseDetailsComponent implements OnInit {
   constructor(private svs: PhraseService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.forEach((params: Params) => {
-      const id = +params.id;
-
+    this.activatedRoute.params.subscribe((params: Params) => {
       this.svs
-        .getPhrase(id)
+        .getPhrase(+params.id)
         .then(res => this.phrase = res);
     })
   }
