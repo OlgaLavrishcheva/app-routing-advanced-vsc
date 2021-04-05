@@ -24,6 +24,8 @@ export class PhraseDetailsComponent implements OnInit {
   goToPhrasesList(): void {
     const phraseID = this.phrase ? this.phrase.id : null;
 
-    this.router.navigate(['/phrases', {id: phraseID, param1: 123, param2: 'test'}]);
+    this.router.navigate(
+      ['../', {id: phraseID, param1: 123, param2: 'test'}],
+      {relativeTo: this.activatedRoute});
   }
 }

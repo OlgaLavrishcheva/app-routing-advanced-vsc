@@ -25,11 +25,11 @@ export class PhraseListComponent implements OnInit {
     });
   }
 
-  onSelect(selected: Phrase): void {
-    this.router.navigate(['/phrase', selected.id]);
-  }
-
   isSelected(phrase: Phrase): boolean {
     return phrase.id === this.selectedID;
+  }
+
+  onSelect(selected: Phrase): void {
+    this.router.navigate([selected.id], {relativeTo: this.activatedRoute});
   }
 }
