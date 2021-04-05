@@ -1,11 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PhraseDetailsComponent } from './phrase-details/phrase-details.component';
+import { PhraseHomeComponent } from './phrase-home/phrase-home.component';
 import { PhraseListComponent } from './phrase-list/phrase-list.component';
 
 const routes: Routes = [
-{path: 'phrases', component: PhraseListComponent},
-{path: 'phrase/:id', component: PhraseDetailsComponent}
+  { path: '', redirectTo: 'phrases', pathMatch: 'full' },
+  {
+    path: 'phrases',
+    component: PhraseHomeComponent,
+    children: [
+      {
+        path: '',
+        component: PhraseListComponent,
+        children: [
+          { path: ':id', component: PhraseDetailsComponent }
+        ]
+      }
+    ]
+  },
 ];
 
 @NgModule({
