@@ -2,7 +2,8 @@
 
 <ul class="phrases">
     <li *ngFor="let phrase of phrasses"
-        (click)="onSelect(phrase)">
+        (click)="onSelect(phrase)"
+        [class.selected]="isSelected(phrase)">
         {{phrase.value}}
     </li>
 </ul>
