@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { delay, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,20 +12,11 @@ export class AuthService {
 
   constructor() { }
 
-  login(login: string, password: string): Promise<boolean> {
-    const promise = new Promise (resolve => {
-      setTimeout(() => {
-        resolve({
-          login: 'admin',
-          password: '123'
-        });
-      }, 1000);
-    });
+  login(login: string, password: string): Observable<boolean> {
 
-    return promise.then((res: any) => {
-      return login === res.login && password === res.password ? this.isLoggegIn = true : false;
-    });
-    
+    const result = of({ login: 'admin', password: '123' }).pipe(delay(2000));
+    return result.pipe(map((res: any) => 
+    login === res.login && password === res.password ? this.isLoggegIn = true : false));
   }
 
   logout() {
