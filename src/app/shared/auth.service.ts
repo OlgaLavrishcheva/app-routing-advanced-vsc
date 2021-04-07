@@ -6,17 +6,27 @@ import { Injectable } from '@angular/core';
 export class AuthService {
 
   isLoggegIn = false;
+  redirectUrl: string;
 
   constructor() { }
 
-  login(login: string, password: string): boolean {
-    console.log(login);
-    console.log(password);
+  login(login: string, password: string): Promise<boolean> {
+    const promise = new Promise (resolve => {
+      setTimeout(() => {
+        resolve({
+          login: 'admin',
+          password: '123'
+        });
+      }, 1000);
+    });
 
-    return login === 'admin' && password === '123' ? this.isLoggegIn = true : false;
+    return promise.then((res: any) => {
+      return login === res.login && password === res.password ? this.isLoggegIn = true : false;
+    });
+    
   }
 
-  logout() {    
+  logout() {
     this.isLoggegIn = false;
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../shared/auth.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   userLogin = 'admin';
   message: string;
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.setMessage();
@@ -25,11 +26,15 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.message = 'Trying to log in...';
 
-    let temp;
-    temp = this.authService.login(this.userLogin, this.userPassword);
+    this.authService.login(this.userLogin, this.userPassword).then(res => {
+      console.log('Login promise result:', res);
+      this.setMessage();
+      if(this.authService.isLoggegIn) {
+        const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/admin';
+        this.router.navigate([redirect]);
+      }
+    });
 
-    console.log(temp);
-    this.setMessage();
   }
 
   logout(): void {
