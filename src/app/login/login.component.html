@@ -1,0 +1,13 @@
+<h3>Login form</h3>
+
+<p>{{message}}</p>
+
+<div *ngIf="!authService.isLoggegIn">
+    <div><label>Login <input type="text" [(ngModel)]="userLogin"></label></div>
+    <div><label>Password <input type="password" [(ngModel)]="userPassword"></label></div>
+    <button (click)="login()">Login</button>
+</div>
+
+<div *ngIf="authService.isLoggegIn">
+    <button (click)="logout()">Logout</button>
+</div>
