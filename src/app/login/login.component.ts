@@ -26,17 +26,13 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.message = 'Trying to log in...';
     this.authService.login(this.userLogin, this.userPassword).subscribe(res => {
-      console.log(res);
-    })
-
-    // this.authService.login(this.userLogin, this.userPassword).then(res => {
-    //   console.log('Login promise result:', res);
-    //   this.setMessage();
-    //   if(this.authService.isLoggegIn) {
-    //     const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/admin';
-    //     this.router.navigate([redirect]);
-    //   }
-    // });
+      console.log('Login subscribe result:', res);
+      this.setMessage();
+      if(this.authService.isLoggegIn) {
+        const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/admin';
+        this.router.navigate([redirect]);
+      }
+    });
 
   }
 
