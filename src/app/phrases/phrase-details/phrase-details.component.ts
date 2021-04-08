@@ -19,10 +19,16 @@ export class PhraseDetailsComponent implements OnInit {
     private svs: PhraseService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private auth: AuthService
+    public auth: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.activatedRoute.data.subscribe((data: { phrase: Phrase }) => {
+      this.phrase = data.phrase;
+      this.editValue = this.phrase.value;
+      this.editLanguage = this.phrase.language;
+    });
+
     this.activatedRoute.params.subscribe((params: Params) => {
       this.svs
         .getPhrase(+params.id)

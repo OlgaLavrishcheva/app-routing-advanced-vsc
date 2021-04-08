@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CanDeactivateGuard } from '../shared/can-deactivate-guard.service';
+import { PhrasesDetailsResolveService } from '../shared/phrases-details-resolve.service';
 import { PhraseDetailsComponent } from './phrase-details/phrase-details.component';
 import { PhraseHomeComponent } from './phrase-home/phrase-home.component';
 import { PhraseListComponent } from './phrase-list/phrase-list.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
           { 
             path: ':id',
             canDeactivate: [CanDeactivateGuard],
+            resolve: {phrase: PhrasesDetailsResolveService},
             component: PhraseDetailsComponent
           }
         ]
